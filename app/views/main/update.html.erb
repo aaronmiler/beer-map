@@ -1,0 +1,5 @@
+<%= form_tag({:controller => "main", :action => 'upload', :method=> :post}, {:multipart => true}) do  %>
+  <%= label_tag "File" %>
+  <%= file_field_tag "file" %>
+  <%= submit_tag "Update Breweries" %>
+<% end %>

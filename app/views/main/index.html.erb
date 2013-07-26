@@ -1,0 +1,18 @@
+<div id="map" class="google-maps">
+	
+</div>
+<div style="margin-top:275px;">
+  <div id="breweryInfo">
+    
+  </div>
+  <button class="return">Back</button>
+</div>
+<% content_for :vars do %>
+	var startLat =<%= @lat %>;
+	var startLon =<%= @lon %>;
+<% end %>
+<% content_for :script do %>
+	<% @breweries.each do |b| %>
+		addBrewery("<%= b.name %>",<%= b.lat %>,<%= b.lon %>,<%= b.id %>)
+	<% end %>
+<% end %>
