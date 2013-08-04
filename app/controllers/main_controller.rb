@@ -25,6 +25,7 @@ class MainController < ApplicationController
     CSV.read(filename, "r:windows-1250", :headers => true).each do |row|
     	brew = Brewery.where('name = ?', row['name'])
     	unless brew.empty?
+        brew = brew.first
         row.each do |a|
           brew.instance_variable_get('@'+a[0])
           brew.send(a[0].downcase.gsub('_','')+'=', a[1])

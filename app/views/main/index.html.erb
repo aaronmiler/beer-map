@@ -2,17 +2,20 @@
 	
 </div>
 <div style="margin-top:275px;">
-  <div id="breweryInfo">
-    
+  <div id="brewery">
+    <h1 class="title"></h1>
+    <div class="description"></div>
+    <div class="seasonal" style="display:none">Seasonal Beer</div>
+    <div class="food" style="display:none">Food</div>
   </div>
   <button class="return">Back</button>
 </div>
 <% content_for :vars do %>
-	var startLat =<%= @lat %>;
-	var startLon =<%= @lon %>;
+	var startLat = <%= @lat %>;
+	var startLon = <%= @lon %>;
 <% end %>
 <% content_for :script do %>
 	<% @breweries.each do |b| %>
-		addBrewery("<%= b.name %>",<%= b.lat %>,<%= b.lon %>,<%= b.id %>)
+		addBrewery("<%= b.name %>",<%= b.lat %>,<%= b.lon %>,<%= b.id %>, "brewery")
 	<% end %>
 <% end %>

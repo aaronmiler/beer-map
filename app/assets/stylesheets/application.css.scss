@@ -10,6 +10,28 @@
  *
  *= require_self
  */
+
+ @-moz-keyframes pulse{
+ 	0%{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity:0}
+ 	50%{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=25);opacity:0.25}
+ 	100%{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity:0}
+ }
+ @-webkit-keyframes pulse{
+ 	0%{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity:0}
+ 	50%{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=25);opacity:0.25}
+ 	100%{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity:0}
+ }
+ @-o-keyframes pulse{
+ 	0%{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity:0}
+ 	50%{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=25);opacity:0.25}
+ 	100%{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity:0}
+ }
+ @keyframes pulse{
+ 	0%{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity:0}
+ 	50%{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=25);opacity:0.25}
+ 	100%{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity:0}
+ }
+
 @import "bootstrap";
 @import "responsive";
 #map {
@@ -33,4 +55,60 @@
 	background-color:#369;
 	border:none;
 	color:#FFF;
+}
+.marker {
+	position:absolute;
+}
+.brewery {
+	border:2px solid blue;
+	width:10px;
+	height:10px;
+	.tooltip {
+		display:none;
+		background-color:white;
+		z-index:99999;
+		position:absolute;
+		top:0px;
+		left:10px;
+		opacity:1;
+		padding:5px 10px;
+		font-size:15px;
+	}
+	&:hover {
+		.tooltip {
+			display:block;
+		}
+	}
+}
+.userLocation {
+	background-color: #00555f;
+	height: 8px;
+	width: 8px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	cursor: -webkit-grab;
+	div {
+		background-color: #13a1af;
+		border: 1px solid #00555f;
+		content: '';
+		height: 25px;
+		position: absolute;
+		width: 25px;
+		-webkit-border-radius: 16px;
+		-moz-border-radius: 16px;
+		-ms-border-radius: 16px;
+		-o-border-radius: 16px;
+		border-radius: 16px;
+		filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=25);
+		opacity: .25;
+		-moz-animation: pulse 3000ms infinite ease-in-out;
+		-o-animation: pulse 3000ms infinite ease-in-out;
+		-webkit-animation: pulse 3000ms infinite ease-in-out;
+		animation: pulse 3000ms infinite ease-in-out;
+		top:-9px;
+		left:-9px;
+	}
 }

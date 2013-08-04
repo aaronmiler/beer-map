@@ -6,43 +6,41 @@ var mapOptions = {
 var map = new google.maps.Map(document.getElementById("map"),
 	mapOptions);
 
-
-function addBrewery(name,lat,lon,brewid) {
+function addBrewery(name,lat,lon,brewid,className) {
 	var myLatlng = new google.maps.LatLng(lat,lon);
-		var marker = new google.maps.Marker({
-	    position: myLatlng,
-	    id: brewid,
-	    map: map,
-	    title: name
-	});
-	var inOptions = {
-		content: marker.title +"<button data-brewid='"+marker.id+"' data-center='"+marker.getPosition()+"' class='concept' onClick='buttonClick(event)'>Click Me</button>",
-		boxStyle: {
-			background: "rgba(255,255,255,.9)",
-			padding: '5px',
-			width: '200px',
-			enableEventPropagation: true
-		}
-	}
-	var ib = new InfoBox(inOptions);
 
-	google.maps.event.addListener(marker, 'click', function() {
-	  ib.open(map, this);	
-	});
+  overlay = new CustomMarker(myLatlng, map, className +" brew" + brewid,brewid, name);
+	// var inOptions = {
+	// 	content: name +"<button data-brewid='"+brewid+"' data-center='"+overlay.getPosition()+"' class='concept' onClick='buttonClick(event)'>Click Me</button>",
+	// 	boxStyle: {
+	// 		background: "rgba(255,255,255,.9)",
+	// 		padding: '5px',
+	// 		width: '200px',
+	// 		enableEventPropagation: true
+	// 	}
+	// }
+	// var ib = new InfoBox(inOptions);
+
+	// google.maps.event.addListener(overlay, 'click', function() {
+	//   ib.open(map, this);	
+	// });
 
 }
 google.maps.event.addDomListener(window, 'resize', function() {
 		google.maps.event.trigger(map, 'resize');
 });
 
-function buttonClick(event){
+function buttonClick(brewid,event){
 	$.ajax({
-		url: "/breweries/"+$(event.target).attr('data-brewid'),
+		url: "/breweries/"+brewid,
 		success:function(data){
-			$("#breweryInfo").html('<h1>'+data.name+'</h1>')
+			$("#brewery .title").html('<h1>'+data.name+'</h1>')
+			$("#brewery .description").html(data.desc)
+			data.seasonal ? $("#brewery .seasonal").show() : $("#brewery .seasonal").hide();
+			data.food ? $("#brewery .food").show() : $("#brewery .food").hide();
 			$("#map").animate({"height": "250px"}, "fast",function(){
 				google.maps.event.trigger(map, 'resize');
-				var newPos = $(event.target).attr('data-center').replace(/\(|\)/g,'')
+				var newPos = $(event.target).attr('data-center').replace(/\(|\)/g,'')				
 				newPos = newPos.split(',')
 				newPos = new google.maps.LatLng(newPos[0],newPos[1])
 				map.panTo(newPos)
@@ -61,4 +59,19 @@ $('body').on('click','.return',function(){
 		google.maps.event.trigger(map, 'resize');
 	})
 
+})
+if(!!navigator.geolocation){
+	navigator.geolocation.getCurrentPosition(function(position) {
+
+		var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+		
+		map.setCenter(geolocate);
+
+		overlay = new CustomMarker(geolocate, map, "userLocation");
+
+	});
+}
+
+$('body').on('click','.brewery i',function(event){
+	buttonClick($(this).attr('data-brewid'),event)
 })

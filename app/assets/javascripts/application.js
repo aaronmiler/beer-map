@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree ./bootstrap/
+//= require custom_marker
 //= require map
 //= require infobox
