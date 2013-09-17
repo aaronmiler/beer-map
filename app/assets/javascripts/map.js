@@ -75,3 +75,23 @@ if(!!navigator.geolocation){
 $('body').on('click','.brewery i',function(event){
 	buttonClick($(this).attr('data-brewid'),event)
 })
+
+
+// Custom handlers for clicking on a marker, as well as hovering
+$('body').on('mouseenter','.brewery.marker',function(event){
+	$(this).children('.tooltip').show()
+})
+$('body').on('mouseleave','.brewery.marker',function(event){
+	if (!$(this).children('.tooltip').hasClass('active')){
+		$(this).children('.tooltip').hide()
+	}
+})
+$('body').on('click','.brewery.marker',function(){
+	if ($(this).children('.tooltip').hasClass('active')){
+		$('.tooltip').hide().removeClass('active');
+	}
+	else {
+		$('.tooltip').hide().removeClass('active');
+		$(this).children('.tooltip').show().addClass('active')
+	}
+})
