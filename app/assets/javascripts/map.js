@@ -9,7 +9,7 @@ var map = new google.maps.Map(document.getElementById("map"),
 function addBrewery(name,lat,lon,brewid,className) {
 	var myLatlng = new google.maps.LatLng(lat,lon);
 
-  overlay = new CustomMarker(myLatlng, map, className +" brew" + brewid,brewid, name);
+  overlay = new CustomMarker(myLatlng, map, className +" glyphicon glyphicon-flag brew" + brewid,brewid, name);
 	// var inOptions = {
 	// 	content: name +"<button data-brewid='"+brewid+"' data-center='"+overlay.getPosition()+"' class='concept' onClick='buttonClick(event)'>Click Me</button>",
 	// 	boxStyle: {
@@ -36,6 +36,7 @@ function buttonClick(brewid,event){
 		success:function(data){
 			$("#brewery .title").html('<h1>'+data.name+'</h1>')
 			$("#brewery .description").html(data.desc)
+			$(".return").show()
 			data.seasonal ? $("#brewery .seasonal").show() : $("#brewery .seasonal").hide();
 			data.food ? $("#brewery .food").show() : $("#brewery .food").hide();
 			$("#map").animate({"height": "250px"}, "fast",function(){
@@ -50,9 +51,10 @@ function buttonClick(brewid,event){
 	})
 }
 $('body').on('click','.return',function(){
+	$(".return").hide()
 	$("#map").animate({
 			"height": '96%',
-			"bottom":"0px"
+			"bottom":"60px"
 		}, "fast",function(){
 		$("#map").removeAttr('style')
 		$("#breweryInfo").empty()

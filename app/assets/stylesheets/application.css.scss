@@ -9,6 +9,8 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require bootstrap
+ *= require bootstrap-theme
  */
 
  @-moz-keyframes pulse{
@@ -32,14 +34,14 @@
  	100%{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity:0}
  }
 
-@import "bootstrap";
-@import "responsive";
+@import "flat-ui";
+
 #map {
 	position:absolute;
 	top:50px;
 	left:0;
 	right:0;
-	bottom:0;
+	bottom:60px;
 	border:1px solid black;
 	@media(min-width:980px){
 		top:40px;
@@ -57,12 +59,10 @@
 	color:#FFF;
 }
 .marker {
-	position:absolute;
+	position:absolute !important;
+	font-size:18px !important;
 }
 .brewery {
-	border:2px solid blue;
-	width:10px;
-	height:10px;
 	.tooltip {
 		display:none;
 		background-color:white;
@@ -106,4 +106,12 @@
 		top:-9px;
 		left:-9px;
 	}
+}
+#footer {
+  height: 60px;
+  background-color: #f5f5f5;
+  bottom:0px;
+  position: absolute;
+  left:0px;
+  right:0px;
 }

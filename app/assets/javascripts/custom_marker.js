@@ -32,7 +32,7 @@ CustomMarker.prototype.draw = function() {
       div.appendChild(child)
       var button = document.createElement('i')
       button.textContent = ""
-      button.className = "icon-info-sign"
+      button.className = "glyphicon glyphicon-info-sign"
       button.setAttribute('data-brewid',this.brewid)
       button.setAttribute('data-center',this.latlng_)
       child.appendChild(button)
