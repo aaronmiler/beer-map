@@ -28,14 +28,19 @@ CustomMarker.prototype.draw = function() {
       div.style.cursor = 'pointer';
       var child = document.createElement('DIV')
       child.className = "tooltip"
-      child.textContent = this.brewName
+      var text = document.createElement('p')
+      text.textContent = this.brewName + '\n' + 'Address goes here?'
       div.appendChild(child)
       var button = document.createElement('i')
       button.textContent = ""
       button.className = "glyphicon glyphicon-info-sign"
       button.setAttribute('data-brewid',this.brewid)
       button.setAttribute('data-center',this.latlng_)
+      var clear = document.createElement('div')
+      clear.className = "clear-fix"
+      child.appendChild(text)
       child.appendChild(button)
+      child.appendChild(clear)
     }
     div.className = this.classes + " marker"
 
